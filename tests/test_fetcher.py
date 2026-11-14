@@ -2,11 +2,11 @@ from unittest.mock import patch, Mock
 import pytest
 import requests
 
-# from grabcode.fetcher import get_user, get_user_name
+from grabcode.fetcher import get_media
 
 
 @patch("grabcode.fetcher.requests.get")
-def test_fetch_caption_success(mock_get):
+def test_get_media_success(mock_get):
     # Arrange
     mock_response = Mock()
     mock_response.status_code = 200
@@ -34,7 +34,7 @@ def test_fetch_caption_success(mock_get):
     mock_get.return_value = mock_response
 
     # Act
-    result = fetch_caption(2)
+    result = get_media()
 
     # Assert
     assert result == {
