@@ -67,3 +67,10 @@ def test_get_media_raises_on_timeout():
 
     with pytest.raises(requests.Timeout):
         get_media()
+
+
+def test_get_media_raises_on_missing_env(monkeypatch):
+    monkeypatch.delenv("INSTAGRAM_USER_ID")
+
+    with pytest.raises(RuntimeError, match="INSTAGRAM_USER_ID"):
+        get_media()

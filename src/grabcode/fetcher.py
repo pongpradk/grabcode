@@ -4,8 +4,6 @@ import os
 import requests
 from dotenv import load_dotenv
 
-load_dotenv()
-
 GRAPH_API_URL = "https://graph.facebook.com/v27.0"
 DEFAULT_LIMIT = 4
 
@@ -46,4 +44,5 @@ def get_media(limit: int = DEFAULT_LIMIT):
 
 
 if __name__ == "__main__":
+    load_dotenv()
     print(json.dumps(get_media(), ensure_ascii=False, indent=2))
