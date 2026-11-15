@@ -1,3 +1,4 @@
+import json
 import os
 
 import requests
@@ -45,4 +46,4 @@ def get_media(limit: int = DEFAULT_LIMIT):
 
 
 if __name__ == "__main__":
-    print(get_media())
+    print(json.dumps(get_media(), ensure_ascii=False, indent=2))
