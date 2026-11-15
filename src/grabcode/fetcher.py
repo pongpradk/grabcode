@@ -8,10 +8,16 @@ load_dotenv()
 GRAPH_API_URL = "https://graph.facebook.com/v27.0"
 FIELDS = "business_discovery.username(grabfoodth){media.limit(4){caption,id,permalink,timestamp}}"
 
+def require_env(name: str) -> str:
+    value = os.getenv(name)
+    if not value:
+        raise RuntimeError(f"Missing required environment variable: {name}")
+    return value
+
 
 def get_media():
-    instagram_user_id = os.getenv("INSTAGRAM_USER_ID")
-    extended_user_access_token = os.getenv("EXTENDED_USER_ACCESS_TOKEN")
+    instagram_user_id = require_env("INSTAGRAM_USER_ID")
+    extended_user_access_token = require_env("EXTENDED_USER_ACCESS_TOKEN")
 
     response = requests.get(
         f"{GRAPH_API_URL}/{instagram_user_id}",
