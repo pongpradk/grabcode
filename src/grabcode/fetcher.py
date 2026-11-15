@@ -32,7 +32,14 @@ def get_media(limit: int = DEFAULT_LIMIT):
         params={"fields": build_fields(limit), "access_token": extended_user_access_token},
         timeout=5,
     )
-    response.raise_for_status()
+    if not response.ok:
+        try:
+            message = response.json()["error"]["message"]
+        except (ValueError, KeyError, TypeError):
+            response.raise_for_status()
+        raise requests.HTTPError(
+            f"Graph API error {response.status_code}: {message}", response=response
+        )
 
     return response.json()
 
