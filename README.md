@@ -20,8 +20,10 @@ uv sync
 ## Usage
 
 ```bash
-uv run grabcode
+uv run src/grabcode/fetcher.py
 ```
+
+Prints the latest 4 posts from @grabfoodth as JSON.
 
 ## Tests
 
