@@ -6,7 +6,15 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GRAPH_API_URL = "https://graph.facebook.com/v27.0"
-FIELDS = "business_discovery.username(grabfoodth){media.limit(4){caption,id,permalink,timestamp}}"
+DEFAULT_LIMIT = 4
+
+
+def build_fields(limit: int) -> str:
+    return (
+        "business_discovery.username(grabfoodth)"
+        f"{{media.limit({limit}){{caption,id,permalink,timestamp}}}}"
+    )
+
 
 def require_env(name: str) -> str:
     value = os.getenv(name)
@@ -15,13 +23,13 @@ def require_env(name: str) -> str:
     return value
 
 
-def get_media():
+def get_media(limit: int = DEFAULT_LIMIT):
     instagram_user_id = require_env("INSTAGRAM_USER_ID")
     extended_user_access_token = require_env("EXTENDED_USER_ACCESS_TOKEN")
 
     response = requests.get(
         f"{GRAPH_API_URL}/{instagram_user_id}",
-        params={"fields": FIELDS, "access_token": extended_user_access_token},
+        params={"fields": build_fields(limit), "access_token": extended_user_access_token},
         timeout=5,
     )
     response.raise_for_status()
