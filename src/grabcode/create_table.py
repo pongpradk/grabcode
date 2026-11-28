@@ -7,6 +7,6 @@ with get_connection() as conn:
                 id BIGINT UNIQUE NOT NULL,
                 caption TEXT,
                 permalink TEXT NOT NULL,
-                timestamp TIMESTAMPTZ
+                timestamp TIMESTAMPTZ NOT NULL
             )
         """)
