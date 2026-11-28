@@ -5,7 +5,7 @@ import requests
 from dotenv import load_dotenv
 
 GRAPH_API_URL = "https://graph.facebook.com/v27.0"
-DEFAULT_LIMIT = 4
+DEFAULT_LIMIT = 1
 
 
 def build_fields(limit: int) -> str:

@@ -48,7 +48,7 @@ def test_get_media_returns_parsed_json():
         match=[
             matchers.query_param_matcher(
                 {
-                    "fields": "business_discovery.username(grabfoodth){media.limit(4){caption,id,permalink,timestamp}}",
+                    "fields": "business_discovery.username(grabfoodth){media.limit(1){caption,id,permalink,timestamp}}",
                     "access_token": "test-token",
                 }
             )
