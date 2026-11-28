@@ -1,14 +1,8 @@
-import os
 import psycopg
 from dotenv import load_dotenv
+from grabcode.config import require_env
 
 load_dotenv()
-
-def require_env(name: str) -> str:
-    value = os.getenv(name)
-    if not value:
-        raise RuntimeError(f"Missing required environment variable: {name}")
-    return value
 
 def get_connection():
     return psycopg.connect(

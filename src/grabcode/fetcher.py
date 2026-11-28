@@ -1,8 +1,8 @@
 import json
-import os
 
 import requests
 from dotenv import load_dotenv
+from grabcode.config import require_env
 
 GRAPH_API_URL = "https://graph.facebook.com/v27.0"
 DEFAULT_LIMIT = 1
@@ -13,13 +13,6 @@ def build_fields(limit: int) -> str:
         "business_discovery.username(grabfoodth)"
         f"{{media.limit({limit}){{caption,id,permalink,timestamp}}}}"
     )
-
-
-def require_env(name: str) -> str:
-    value = os.getenv(name)
-    if not value:
-        raise RuntimeError(f"Missing required environment variable: {name}")
-    return value
 
 
 def get_media(limit: int = DEFAULT_LIMIT):
